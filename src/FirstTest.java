@@ -132,6 +132,21 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testCompareTextInSearchField(){
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        assertElementHasText(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Search…",
+                "Text in the Search field does not equal to 'Search…'");
+    }
+
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
@@ -174,5 +189,22 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by,error_message, timeoutInSeconds);
         element.clear();
         return element;
+    }
+
+    private void assertElementHasText(By by, String expected_text, String error_message){
+
+
+        WebElement element = waitForElementPresent(
+                by,
+                "Cannot find element"
+        );
+
+        String actual_text = element.getAttribute("text");
+
+        Assert.assertEquals(
+                error_message,
+                expected_text,
+                actual_text
+        );
     }
 }
