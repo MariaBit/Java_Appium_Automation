@@ -130,6 +130,7 @@ public class FirstTest {
                 "Java (programming language)",
                 article_title
         );
+
     }
 
     @Test
@@ -145,6 +146,47 @@ public class FirstTest {
                 By.id("org.wikipedia:id/search_src_text"),
                 "Search…",
                 "Text in the Search field does not equal to 'Search…'");
+    }
+
+    @Test
+    public void testFindArticlesAndClear(){
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Git",
+                "Cannot find Search input",
+                5
+        );
+
+        assertElementHasText(
+                By.id("org.wikipedia:id/page_list_item_title"),
+                "Git",
+                "Header in the article does not equal to 'Git'");
+
+        assertElementHasText(
+                By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1]"),
+                "Gitanos",
+                "Text in the article does not equal to 'Gitanos'");
+
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find 'X' to cancel search",
+                10
+        );
+
+
+        assertElementHasText(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Search…",
+                "Text in the Search field does not equal to 'Search…' after cleaning"
+        );
     }
 
 
