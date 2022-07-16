@@ -187,6 +187,13 @@ public class FirstTest {
                 "Search…",
                 "Text in the Search field does not equal to 'Search…' after cleaning"
         );
+
+        waitForElementNotPresent(
+                By.id("org.wikipedia:id/page_list_item_title"),
+                "'Git' article is still presented on the page",
+                5
+        );
+
     }
 
 
