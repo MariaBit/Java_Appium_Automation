@@ -211,19 +211,19 @@ public class FirstTest {
         );
 
         waitForElementPresent(
-                By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.TextView[1][contains(@text,'Java')]"),
+                By.xpath("//android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.TextView[1][contains(@text,'Java')]"),
                 "First result on the page does not contain word 'Java'",
                 5
         );
 
         waitForElementPresent(
-                By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.TextView[1][contains(@text,'Java')]"),
+                By.xpath("//android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.TextView[1][contains(@text,'Java')]"),
                 "Second result on the page does not contain word 'Java'",
                 5
         );
 
         waitForElementPresent(
-                By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ListView/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1][contains(@text,'Java')]"),
+                By.xpath("//android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1][contains(@text,'Java')]"),
                 "Third result on the page does not contain word 'Java'",
                 5
         );
