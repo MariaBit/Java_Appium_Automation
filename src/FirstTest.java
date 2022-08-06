@@ -300,10 +300,21 @@ public class FirstTest {
                 5
         );
 
+        waitForElementToRender(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot render Java article page with title 'Java (programming language' for further pressing 'More options' button",
+                10
+        );
 
         waitForElementAndClick(
                 By.xpath("//android.widget.ImageView[@content-desc='More options']"),
                 "Cannot find 'More options' button",
+                10
+        );
+
+        waitForElementToRender(
+                By.xpath("//android.widget.FrameLayout"),
+                "Cannot render menu with 'Add to reading list' option",
                 10
         );
 
@@ -355,6 +366,12 @@ public class FirstTest {
                 By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
                 "Cannot find My lists button",
                 5
+        );
+
+        waitForElementToRender(
+                By.id("org.wikipedia:id/item_container"),
+                "Cannot render container with " + name_of_folder + " list",
+                10
         );
 
         waitForElementAndClick(
@@ -543,7 +560,7 @@ public class FirstTest {
     }
 
     @Test
-    public void saveTwoArticlesToMyListAndDeleteOne(){
+    public void saveTwoArticlesToMyListAndDeleteOne() throws InterruptedException {
 
 //        adding first article
 
@@ -568,10 +585,21 @@ public class FirstTest {
                 5
         );
 
+        waitForElementToRender(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot render Java article page with title 'Java (programming language' to further pressing 'More options' button",
+                10
+        );
 
         waitForElementAndClick(
                 By.xpath("//android.widget.ImageView[@content-desc='More options']"),
                 "Cannot find 'More options' button",
+                10
+        );
+
+        waitForElementToRender(
+                By.xpath("//android.widget.FrameLayout"),
+                "Cannot render menu with 'Add to reading list' option",
                 10
         );
 
@@ -638,10 +666,21 @@ public class FirstTest {
         );
 
 
+        waitForElementToRender(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot render Appium article title  to further pressing 'More options' button",
+                10
+        );
 
         waitForElementAndClick(
                 By.xpath("//android.widget.ImageView[@content-desc='More options']"),
                 "Cannot find 'More options' button",
+                10
+        );
+
+        waitForElementToRender(
+                By.xpath("//android.widget.FrameLayout"),
+                "Cannot render menu with 'Add to reading list' option",
                 10
         );
 
@@ -651,7 +690,7 @@ public class FirstTest {
                 10
         );
 
-                waitForElementAndClick(
+        waitForElementAndClick(
                 By.id("org.wikipedia:id/item_title"),
                 "Cannot find '" + name_of_folder + "' folder",
                 5
@@ -677,6 +716,12 @@ public class FirstTest {
                 5
         );
 
+        waitForElementToRender(
+                By.id("org.wikipedia:id/item_container"),
+                "Cannot render container with " + name_of_folder + " list",
+                10
+        );
+
         waitForElementAndClick(
                 By.xpath("//*[@text='" + name_of_folder + "']"),
                 "Cannot find " + name_of_folder + " list",
@@ -693,7 +738,6 @@ public class FirstTest {
                 "Cannot delete saved 'Object-oriented programming language' article",
                 5
         );
-
 
         waitForElementAndClick(
                 By.xpath("//*[@text='Automation for Apps']"),
@@ -717,6 +761,11 @@ public class FirstTest {
                 ExpectedConditions.presenceOfElementLocated(by)
         );
     }
+
+    private void waitForElementToRender(By by, String error_message, long timeoutInSeconds)
+    {
+        waitForElementPresent(by, error_message, timeoutInSeconds);
+    };
 
     private WebElement waitForElementPresent(By by, String error_message)
     {
@@ -850,7 +899,6 @@ public class FirstTest {
         WebElement element  = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
     }
-
 
 
 }
