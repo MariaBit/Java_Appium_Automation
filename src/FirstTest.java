@@ -560,7 +560,7 @@ public class FirstTest {
     }
 
     @Test
-    public void saveTwoArticlesToMyListAndDeleteOne() throws InterruptedException {
+    public void saveTwoArticlesToMyListAndDeleteOne() {
 
 //        adding first article
 
@@ -899,6 +899,5 @@ public class FirstTest {
         WebElement element  = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
     }
-
 
 }
