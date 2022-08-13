@@ -15,7 +15,9 @@ public class ArticlePageObject extends MainPageObject {
         ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
         MY_LIST_NAME_INPUT ="org.wikipedia:id/text_input",
         MY_LIST_OK_BUTTON ="//*[@text='OK']",
-        CLOSE_ARTICLE_BUTTON ="//android.widget.ImageButton[@content-desc='Navigate up']";
+        CLOSE_ARTICLE_BUTTON ="//android.widget.ImageButton[@content-desc='Navigate up']",
+        FIRST_ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title",
+        THIRD_ARTICLE_TITLE = "//android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1]";
 
 
 
@@ -99,5 +101,34 @@ public class ArticlePageObject extends MainPageObject {
                 5
         );
     }
+
+    public void assertArticleTitleHasTextById (String expected_article_title)
+    {
+        this.assertElementHasText(
+                By.id(FIRST_ARTICLE_TITLE),
+                expected_article_title,
+                "Article title does not equal to expected title"
+        );
+    }
+
+    public void assertArticleTitleHasTextByXpath (String expected_article_title)
+    {
+        this.assertElementHasText(
+                By.xpath(THIRD_ARTICLE_TITLE),
+                expected_article_title,
+                "Third article title does not equal to expected title"
+        );
+    }
+
+    public void waitForTitleToDisappear()
+    {
+        this.waitForElementNotPresent(
+                By.id(FIRST_ARTICLE_TITLE),
+                "Title supposed to be not presented",
+                5
+                );
+
+    }
+
 
 }

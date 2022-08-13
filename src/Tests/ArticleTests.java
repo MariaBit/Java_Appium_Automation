@@ -39,4 +39,22 @@ public class ArticleTests extends CoreTestCase {
         ArticlePageObject.waitForTitleElement();
         ArticlePageObject.swipeToFooter();
     }
+
+    @Test
+    public void testFindArticlesAndClear(){
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Git");
+
+        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+
+        ArticlePageObject.assertArticleTitleHasTextById("Git");
+        ArticlePageObject.assertArticleTitleHasTextByXpath("Gitanos");
+        SearchPageObject.clickCancelSearch();
+        SearchPageObject.waitForEmptySearchPlaceholderToAppear();
+        ArticlePageObject.waitForTitleToDisappear();
+
+    }
 }
