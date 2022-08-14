@@ -48,7 +48,7 @@ public class MyListsTest extends CoreTestCase {
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
         String name_of_folder = "Learning programming";
-        ArticlePageObject.addArticleToMyList(name_of_folder);e
+        ArticlePageObject.addArticleToMyList(name_of_folder);
         ArticlePageObject.closeArticle();
 
         // Adding second article
