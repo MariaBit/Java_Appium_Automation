@@ -6,7 +6,8 @@ import org.openqa.selenium.By;
 public class MyListsPageObject extends MainPageObject{
     private static final String
             FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']";
+            ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']",
+            ARTICLE_BY_SUBSTRING_TPL = "//*[@text='{SUBSTRING}']";
     private static String getFolderXpathByName(String name_of_folder)
     {
         return FOLDER_BY_NAME_TPL.replace( "{FOLDER_NAME}", name_of_folder);
@@ -17,6 +18,11 @@ public class MyListsPageObject extends MainPageObject{
         return ARTICLE_BY_TITLE_TPL.replace( "{TITLE}", article_title);
     }
 
+    private static String getSavedArticleXpathBySubstring (String article_substring)
+    {
+        return ARTICLE_BY_SUBSTRING_TPL.replace( "{SUBSTRING}", article_substring);
+    }
+
         public MyListsPageObject(AppiumDriver driver){
             super(driver);
         }
@@ -24,6 +30,11 @@ public class MyListsPageObject extends MainPageObject{
         public void openFolderByName(String name_of_folder)
         {
             String folder_name_xpath = getFolderXpathByName(name_of_folder);
+
+            this.waitForElementToRender(By.xpath(folder_name_xpath),
+                    "Cannot find folder by name " + name_of_folder,
+                    5);
+
             this.waitForElementAndClick(
                     By.xpath(folder_name_xpath),
                     "Cannot find folder by name " + name_of_folder,
@@ -54,4 +65,10 @@ public class MyListsPageObject extends MainPageObject{
             );
             this.waitForArticleToDisappearByTitle(article_title);
         }
+
+        public void openArticleInMyList(String article_substring)
+    {
+        String article_substring_xpath = getSavedArticleXpathBySubstring(article_substring);
+        this.waitForElementAndClick(By.xpath(article_substring_xpath), "Cannot find article with title " + article_substring, 5);
+    }
 }

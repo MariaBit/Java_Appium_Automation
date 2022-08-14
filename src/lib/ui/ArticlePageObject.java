@@ -15,11 +15,18 @@ public class ArticlePageObject extends MainPageObject {
         ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
         MY_LIST_NAME_INPUT ="org.wikipedia:id/text_input",
         MY_LIST_OK_BUTTON ="//*[@text='OK']",
+        MY_LIST_TITLE = "org.wikipedia:id/item_title",
         CLOSE_ARTICLE_BUTTON ="//android.widget.ImageButton[@content-desc='Navigate up']",
         FIRST_ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title",
-        THIRD_ARTICLE_TITLE = "//android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1]";
+        THIRD_ARTICLE_TITLE = "//android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1]",
+        SUBSTRING_TPL = "//*[@text='{SUBSTRING}']";
 
-
+    /*TEMPLATE METHODS*/
+    private static String getResultSearchElement(String substring)
+    {
+        return SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+    /*TEMPLATE METHODS*/
 
     public ArticlePageObject(AppiumDriver driver)
     {
@@ -87,6 +94,30 @@ public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    public void addNextArticleToMyList(String name_of_folder) {
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_BUTTON),
+                "Cannot find 'More options' button",
+                10
+        );
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "Cannot find 'Add to reading list' option",
+                10
+        );
+
+
+        this.waitForElementAndClick(
+                By.id(MY_LIST_TITLE),
+                "Cannot find My list - '" + name_of_folder + "' folder",
+                5
+        );
+
+    }
+
+
     public void closeArticle ()
     {
         this.waitForElementAndClick(
@@ -130,5 +161,16 @@ public class ArticlePageObject extends MainPageObject {
 
     }
 
+    public void waitForArticleWithSubstringPresent (String article_substring)
+    {
+        String article_substring_xpath = getResultSearchElement(article_substring);
+        this.waitForElementPresent(By.xpath(article_substring_xpath), "Cannot find article by requested substring" + article_substring, 5);
+    }
+
+    public void waitForArticleWithSubstringNotPresent (String article_substring)
+    {
+        String article_substring_xpath = getResultSearchElement(article_substring);
+        this.waitForElementNotPresent(By.xpath(article_substring_xpath), "Article with requested substring " +article_substring + "supposed to be not presented ", 5);
+    }
 
 }
