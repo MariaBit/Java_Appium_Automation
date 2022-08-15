@@ -19,7 +19,8 @@ public class ArticlePageObject extends MainPageObject {
         CLOSE_ARTICLE_BUTTON ="//android.widget.ImageButton[@content-desc='Navigate up']",
         FIRST_ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title",
         THIRD_ARTICLE_TITLE = "//android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1]",
-        SUBSTRING_TPL = "//*[@text='{SUBSTRING}']";
+        SUBSTRING_TPL = "//*[@text='{SUBSTRING}']",
+        ARTICLE_TITLE = "org.wikipedia:id/view_page_title_text";
 
     /*TEMPLATE METHODS*/
     private static String getResultSearchElement(String substring)
@@ -171,6 +172,14 @@ public class ArticlePageObject extends MainPageObject {
     {
         String article_substring_xpath = getResultSearchElement(article_substring);
         this.waitForElementNotPresent(By.xpath(article_substring_xpath), "Article with requested substring " +article_substring + "supposed to be not presented ", 5);
+    }
+
+    public void assertArticleTitlePresent()
+    {
+        this.assertElementPresent(
+                By.id(ARTICLE_TITLE),
+                "Page do not have article title"
+        );
     }
 
 }
